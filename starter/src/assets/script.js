@@ -1,13 +1,38 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
+const products = [
+  /* Create 3 or more product objects using object literal notation 
+     Each product should include five properties
+     - name: name of product (string)
+     - price: price of product (number)
+     - quantity: quantity in cart should start at zero (number)
+     - productId: unique id for the product (number)
+     - image: picture of product (url string)
+  */
+  {
+    name: 'Cherry',
+    price: 1.99,
+    quantity: 0,
+    productId: 1,
+    image: 'images/cherry.jpg'
+  },
+  {
+    name: 'Orange',
+    price: 2.99,
+    quantity: 0,
+    productId: 2,
+    image: 'images/orange.jpg'
+  },
+  {
+    name: 'Strawberry',
+    price: 3.99,
+    quantity: 0,
+    productId: 3,
+    image: 'images/strawberry.jpg'
+  }
 
-/* Create 3 or more product objects using object literal notation 
-   Each product should include five properties
-   - name: name of product (string)
-   - price: price of product (number)
-   - quantity: quantity in cart should start at zero (number)
-   - productId: unique id for the product (number)
-   - image: picture of product (url string)
-*/
+];
+console.log(products);
+
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
