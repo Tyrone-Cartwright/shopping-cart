@@ -31,7 +31,6 @@ const products = [
   }
 
 ];
-console.log(products);
 
 
 /* Images provided in /images folder. All images from Unsplash.com
