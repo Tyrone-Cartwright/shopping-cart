@@ -47,10 +47,13 @@ const cart = [];
   - if the product is not already in the cart, add it to the cart
 */
 function addProductToCart(productId) { 
+  // addProductToCart should get the correct product based on the productId
   let product = products.find(product => product.productId === productId);
+  // addProductToCart should then increase the product's quantity
   product.quantity++;
-
+  // if the product is not already in the cart
   if (!cart.includes(product)) {
+    // Add the product to the cart
     cart.push(product);    
   }
 }
@@ -60,7 +63,9 @@ function addProductToCart(productId) {
   - increaseQuantity should then increase the product's quantity
 */
 function increaseQuantity(productId) { 
+  // increaseQuantity should get the correct product based on the productId
   let product = products.find(product => product.productId === productId);
+  // increaseQuantity should then increase the product's quantity
   product.quantity++;
 }
 
@@ -70,9 +75,11 @@ function increaseQuantity(productId) {
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
 function decreaseQuantity(productId) { 
+  // decreaseQuantity should get the correct product based on the productId
   let product = products.find(product => product.productId === productId);
+  // 
   product.quantity--;
-
+  // if the function decreases the quantity to 0, the product is removed from the cart
   if (product.quantity === 0) { 
     removeProductFromCart(productId);
   }
@@ -84,8 +91,11 @@ function decreaseQuantity(productId) {
   - removeProductFromCart should remove the product from the cart
 */
 function removeProductFromCart(productId) { 
+  // removeProductFromCart should get the correct product based on the productId
   let product = products.find(product => product.productId === productId);
+  // removeProductFromCart should update the product quantity to 0
   product.quantity = 0;
+  // removeProductFromCart should remove the product from the cart
   cart.splice(cart.indexOf(product), 1);
 }
 
@@ -95,19 +105,23 @@ function removeProductFromCart(productId) {
   Hint: price and quantity can be used to determine total cost
 */
 function cartTotal() { 
+  // cartTotal should iterate through the cart to get the total cost of all products
   let total = 0;
-  for (let product of cart) { 
-    total += product.price * product.quantity;
+  // Iterate through the cart to get the total cost of all products
+  for (let i = 0; i < cart.length; i++) { 
+    // price and quantity is used to determine total cost
+    total += cart[i].quantity * cart[i].price;
   }
+  // cartTotal should return the total cost of the products in the cart
   return total;
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart() { 
-  for (let product of cart) {
-    product.quantity = 0;
-  }
-  cart.length = 0;
+  // emptyCart should iterate through the cart and set the quantity of all products to 0
+  cart.forEach(function (product) {
+    removeProductFromCart(product.productId);
+  })
 }
 
 /* Create a function named pay that takes in an amount as an argument
@@ -116,15 +130,24 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
-totalReceived = 0;
+let totalPaid = 0;
 function pay(amount) { 
   // - amount is the money paid by customer
   // - pay will return a negative number if there is a remaining balance
   // - pay will return a positive number if money should be returned to customer
-  totalReceived += amount;
-  let remaining = amount - cartTotal();
 
-  return amount - cartTotal();
+  // Add the amount to the totalPaid
+  totalPaid += amount;
+  // Calculate the remaining balance
+  let remainingBal = totalPaid - cartTotal();
+  // Check if there is a remaining balance and empty the cart if there is no remaining balance
+  if (remainingBal >= 0) { 
+    emptyCart();
+    // Reset the totalPaid
+    totalPaid = 0;
+  }
+  // Return the remaining balance
+  return remainingBal;
 }
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
