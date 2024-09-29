@@ -24,12 +24,18 @@ const products = [
   }
 ];
 
+// Function to find a product by its id
+function findProductById(products, productId) {
+  // findProductById should return the product with the matching productId
+    return products.find(product => product.productId === productId);
+}
+
 /* Declare an empty array named cart to hold the items in the cart */
 const cart = [];
 // Function to add a product to the cart
 function addProductToCart(productId) { 
   // addProductToCart should get the correct product based on the productId
-  let product = products.find(product => product.productId === productId);
+  let product = findProductById(products, productId);
   // addProductToCart should then increase the product's quantity
   product.quantity++;
   // if the product is not already in the cart
@@ -41,14 +47,14 @@ function addProductToCart(productId) {
 // Function to increase the quantity of a product in the cart
 function increaseQuantity(productId) { 
   // increaseQuantity should get the correct product based on the productId
-  let product = products.find(product => product.productId === productId);
+  let product = findProductById(products, productId);
   // increaseQuantity should then increase the product's quantity
   product.quantity++;
 }
 // Function to decrease the quantity of a product in the cart
 function decreaseQuantity(productId) { 
   // decreaseQuantity should get the correct product based on the productId
-  let product = products.find(product => product.productId === productId);
+  let product = findProductById(products, productId);
   // 
   product.quantity--;
   // if the function decreases the quantity to 0, the product is removed from the cart
@@ -57,23 +63,19 @@ function decreaseQuantity(productId) {
   }
 }
 // Function to remove a product from the cart
+// removeProductFromCart should get the correct product based on the productId
 function removeProductFromCart(productId) { 
-  // removeProductFromCart should get the correct product based on the productId
-  let product = products.find(product => product.productId === productId);
+  // find the product in the cart
+  let product = findProductById(products, productId);
   // removeProductFromCart should update the product quantity to 0
   product.quantity = 0;
   // removeProductFromCart should remove the product from the cart
   cart.splice(cart.indexOf(product), 1);
 }
 // Function to get the total cost of all products in the cart
-function cartTotal() { 
-  // cartTotal should iterate through the cart to get the total cost of all products
-  let total = 0;
-  // Iterate through the cart to get the total cost of all products
-  for (let i = 0; i < cart.length; i++) { 
-    // price and quantity is used to determine total cost
-    total += cart[i].quantity * cart[i].price;
-  }
+function cartTotal() {   
+  // Using reduce method to get the total cost of all products 
+  let total = cart.reduce((acc, item) => acc + (item.quantity * item.price), 0);  
   // cartTotal should return the total cost of the products in the cart
   return total;
 }
