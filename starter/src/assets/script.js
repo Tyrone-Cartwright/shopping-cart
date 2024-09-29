@@ -24,7 +24,7 @@ const products = [
   }
 ];
 
-// Function to find a product by its id
+// Helper Function to find a product by its id
 function findProductById(products, productId) {
   // findProductById should return the product with the matching productId
     return products.find(product => product.productId === productId);
